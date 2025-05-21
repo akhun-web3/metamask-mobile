@@ -1,6 +1,6 @@
 import React from 'react';
 import useApprovalRequest from '../../Views/confirmations/hooks/useApprovalRequest';
-import { render } from '@testing-library/react-native';
+import renderWithProvider from '../../../util/test/renderWithProvider';
 import { ApprovalTypes } from '../../../core/RPCMethods/RPCMethodMiddleware';
 import { ApprovalRequest } from '@metamask/approval-controller';
 import SignatureApproval from './SignatureApproval';
@@ -35,7 +35,7 @@ describe('SignatureApproval', () => {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
       } as any);
 
-      const { toJSON } = render(<SignatureApproval />);
+      const { toJSON } = renderWithProvider(<SignatureApproval />, {}, true);
       expect(toJSON()).toMatchSnapshot();
     },
   );
@@ -43,7 +43,7 @@ describe('SignatureApproval', () => {
   it('provides no message params if no approval request', () => {
     mockApprovalRequest(undefined);
 
-    const { toJSON } = render(<SignatureApproval />);
+    const { toJSON } = renderWithProvider(<SignatureApproval />, {}, true);
     expect(toJSON()).toMatchSnapshot();
   });
 
@@ -52,7 +52,7 @@ describe('SignatureApproval', () => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     mockApprovalRequest({ type: ApprovalTypes.ADD_ETHEREUM_CHAIN } as any);
 
-    const { toJSON } = render(<SignatureApproval />);
+    const { toJSON } = renderWithProvider(<SignatureApproval />, {}, true);
     expect(toJSON()).toMatchSnapshot();
   });
 });

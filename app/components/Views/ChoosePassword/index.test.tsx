@@ -22,7 +22,8 @@ describe('ChoosePassword', () => {
   it('should render correctly', () => {
     const { toJSON } = renderWithProvider(
       <ChoosePassword route={{ params: [ONBOARDING, PROTECT] }} />,
-      { state: initialState }
+      { state: initialState },
+      false
     );
     expect(toJSON()).toMatchSnapshot();
   });

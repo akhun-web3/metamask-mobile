@@ -1,6 +1,6 @@
 import React from 'react';
 import useApprovalRequest from '../../Views/confirmations/hooks/useApprovalRequest';
-import { render } from '@testing-library/react-native';
+import renderWithProvider from '../../../util/test/renderWithProvider';
 import { ApprovalTypes } from '../../../core/RPCMethods/RPCMethodMiddleware';
 import {
   ApprovalFlowState,
@@ -46,7 +46,7 @@ describe('FlowLoaderModal', () => {
     mockApprovalFlow(APPROVAL_FLOW_MOCK);
     mockApprovalRequest(undefined);
 
-    const { toJSON } = render(<FlowLoaderModal />);
+    const { toJSON } = renderWithProvider(<FlowLoaderModal />, {}, true);
     expect(toJSON()).toMatchSnapshot();
   });
 
@@ -54,7 +54,7 @@ describe('FlowLoaderModal', () => {
     mockApprovalFlow(undefined);
     mockApprovalRequest(undefined);
 
-    const { toJSON } = render(<FlowLoaderModal />);
+    const { toJSON } = renderWithProvider(<FlowLoaderModal />, {}, true);
     expect(toJSON()).toMatchSnapshot();
   });
 
@@ -64,7 +64,7 @@ describe('FlowLoaderModal', () => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     mockApprovalRequest({ type: ApprovalTypes.CONNECT_ACCOUNTS } as any);
 
-    const { toJSON } = render(<FlowLoaderModal />);
+    const { toJSON } = renderWithProvider(<FlowLoaderModal />, {}, true);
     expect(toJSON()).toMatchSnapshot();
   });
 });

@@ -1,6 +1,5 @@
 import React from 'react';
 import useApprovalRequest from '../../Views/confirmations/hooks/useApprovalRequest';
-import { render } from '@testing-library/react-native';
 import { ApprovalTypes } from '../../../core/RPCMethods/RPCMethodMiddleware';
 import { ApprovalRequest } from '@metamask/approval-controller';
 import {
@@ -54,8 +53,10 @@ describe('TransactionApproval', () => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } as any);
 
-    const { toJSON } = render(
+    const { toJSON } = renderWithProvider(
       <TransactionApproval transactionType={TransactionModalType.Dapp} />,
+      {},
+      true
     );
 
     expect(toJSON()).toMatchSnapshot();
@@ -68,10 +69,12 @@ describe('TransactionApproval', () => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } as any);
 
-    const { toJSON } = render(
+    const { toJSON } = renderWithProvider(
       <TransactionApproval
         transactionType={TransactionModalType.Transaction}
       />,
+      {},
+      true
     );
 
     expect(toJSON()).toMatchSnapshot();
@@ -84,8 +87,10 @@ describe('TransactionApproval', () => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } as any);
 
-    const { toJSON } = render(
+    const { toJSON } = renderWithProvider(
       <TransactionApproval isSigningQRObject QRState={{ test: 'value' }} />,
+      {},
+      true
     );
 
     expect(toJSON()).toMatchSnapshot();
@@ -94,7 +99,7 @@ describe('TransactionApproval', () => {
   it('returns null if no approval request', () => {
     mockApprovalRequest(undefined);
 
-    const { toJSON } = renderWithProvider(<TransactionApproval />, {});
+    const { toJSON } = renderWithProvider(<TransactionApproval />, {}, true);
 
     expect(toJSON()).toMatchInlineSnapshot(`null`);
   });
@@ -106,7 +111,7 @@ describe('TransactionApproval', () => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } as any);
 
-    const { toJSON } = renderWithProvider(<TransactionApproval />, {});
+    const { toJSON } = renderWithProvider(<TransactionApproval />, {}, true);
 
     expect(toJSON()).toMatchInlineSnapshot(`null`);
   });
@@ -121,6 +126,7 @@ describe('TransactionApproval', () => {
     const { toJSON } = renderWithProvider(
       <TransactionApproval transactionType="invalid" />,
       {},
+      true
     );
 
     expect(toJSON()).toMatchInlineSnapshot(`null`);
@@ -144,6 +150,7 @@ describe('TransactionApproval', () => {
     const { toJSON } = renderWithProvider(
       <TransactionApproval transactionType={TransactionModalType.Dapp} />,
       {},
+      true
     );
 
     expect(toJSON()).toMatchInlineSnapshot(`null`);

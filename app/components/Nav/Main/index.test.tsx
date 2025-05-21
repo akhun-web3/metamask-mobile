@@ -8,6 +8,7 @@ import { useSwapConfirmedEvent } from './RootRPCMethodsUI';
 import { act } from '@testing-library/react-hooks';
 import { MetaMetricsEvents } from '../../hooks/useMetrics';
 import { renderHookWithProvider } from '../../../util/test/renderWithProvider';
+import renderWithProvider from '../../../util/test/renderWithProvider';
 import Engine from '../../../core/Engine';
 
 jest.mock('../../../core/Engine', () => ({
@@ -94,12 +95,7 @@ describe('Main', () => {
   });
 
   it('should render correctly', () => {
-    const MainAppContainer = () => (
-      <NavigationContainer>
-        <Main />
-      </NavigationContainer>
-    );
-    const { toJSON } = render(<MainAppContainer />);
+    const { toJSON } = renderWithProvider(<Main />, {}, false);
     expect(toJSON()).toMatchSnapshot();
   });
 

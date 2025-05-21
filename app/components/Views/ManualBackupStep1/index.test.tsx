@@ -30,7 +30,8 @@ describe('ManualBackupStep1', () => {
           },
         }}
       />,
-      { state: initialState }
+      { state: initialState },
+      false
     );
     expect(toJSON()).toMatchSnapshot();
   });

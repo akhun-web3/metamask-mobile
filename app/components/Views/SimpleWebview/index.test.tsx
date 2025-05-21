@@ -1,10 +1,10 @@
 import React from 'react';
-import { render } from '@testing-library/react-native';
+import renderWithProvider from '../../../util/test/renderWithProvider';
 import SimpleWebview from './';
 
 describe('SimpleWebview', () => {
   it('should render correctly', () => {
-    const { toJSON } = render(
+    const { toJSON } = renderWithProvider(
       <SimpleWebview
         navigation={{
           setParams: () => {
@@ -14,6 +14,8 @@ describe('SimpleWebview', () => {
         }}
         route={{ params: { url: 'https://etherscan.io', title: 'etherscan' } }}
       />,
+      {},
+      false
     );
     expect(toJSON()).toMatchSnapshot();
   });

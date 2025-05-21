@@ -1,6 +1,6 @@
 import React from 'react';
 import useApprovalRequest from '../../Views/confirmations/hooks/useApprovalRequest';
-import { render, fireEvent } from '@testing-library/react-native';
+import renderWithProvider from '../../../util/test/renderWithProvider';
 import { ApprovalTypes } from '../../../core/RPCMethods/RPCMethodMiddleware';
 import { ApprovalRequest } from '@metamask/approval-controller';
 import SwitchChainApproval from './SwitchChainApproval';
@@ -55,14 +55,14 @@ describe('SwitchChainApproval', () => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } as any);
 
-    const { toJSON } = render(<SwitchChainApproval />);
+    const { toJSON } = renderWithProvider(<SwitchChainApproval />, {}, true);
     expect(toJSON()).toMatchSnapshot();
   });
 
   it('returns null if no approval request', () => {
     mockApprovalRequest(undefined);
 
-    const { toJSON } = render(<SwitchChainApproval />);
+    const { toJSON } = renderWithProvider(<SwitchChainApproval />, {}, true);
     expect(toJSON()).toMatchSnapshot();
   });
 
@@ -71,7 +71,7 @@ describe('SwitchChainApproval', () => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     mockApprovalRequest({ type: ApprovalTypes.ADD_ETHEREUM_CHAIN } as any);
 
-    const { toJSON } = render(<SwitchChainApproval />);
+    const { toJSON } = renderWithProvider(<SwitchChainApproval />, {}, true);
     expect(toJSON()).toMatchSnapshot();
   });
 

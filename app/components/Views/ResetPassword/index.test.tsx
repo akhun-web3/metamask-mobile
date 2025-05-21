@@ -17,7 +17,7 @@ describe('ChoosePassword', () => {
   it('should render correctly', () => {
     const { toJSON } = renderWithProvider(<ChoosePassword />, {
       state: initialState,
-    });
+    }, false);
     expect(toJSON()).toMatchSnapshot();
   });
 });
